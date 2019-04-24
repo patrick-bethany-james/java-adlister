@@ -1,7 +1,8 @@
-package com.codeup.adlister.dao;
+package main.java.com.codeup.adlister.dao;
 
 import com.codeup.adlister.models.Ad;
 import com.mysql.cj.jdbc.Driver;
+import jdk.nashorn.internal.runtime.regexp.joni.Config;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -10,7 +11,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MySQLAdsDao implements Ads {
+public class MySQLAdsDao implements com.codeup.adlister.dao.Ads {
     private Connection connection = null;
 
     public MySQLAdsDao(Config config) {
