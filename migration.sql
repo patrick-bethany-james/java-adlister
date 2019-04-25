@@ -21,11 +21,13 @@ CREATE TABLE ads (
                    title VARCHAR(250) NOT NULL,
                    description VARCHAR(250) NOT NULL,
                    createDate DATE NOT NULL,
+
                    soldDate DATE,
                    zipCode int,
                    dob DATE,
                    gender VARCHAR(1) NOT NULL,
                    pictureURL VARCHAR(250),
+                   species varchar(15),
                    PRIMARY KEY (id),
                    FOREIGN KEY (user_id) REFERENCES users(id)
                      ON DELETE CASCADE
