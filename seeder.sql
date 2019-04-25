@@ -1,0 +1,16 @@
+use pets_db;
+INSERT INTO ads (user_id, title, description, createDate, soldDate, zipCode, dob, gender, pictureURL)
+VALUES(1, 'Dog for sale', 'Loving dog', '2016-05-17', '2018-03-15', '78250', '1988-05-17', 'M', 'https://i.kinja-img.com/gawker-media/image/upload/s--4vlfc0Vs--/c_scale,f_auto,fl_progressive,q_80,w_800/zhdfbwvbc2miyqyaryl9.jpg'),
+      (1, 'Cat for sale', 'Loving cat', '2016-05-17', '2018-03-15', '78280', '1988-05-17', 'F', 'https://i.kinja-img.com/gawker-media/image/upload/s--4vlfc0Vs--/c_scale,f_auto,fl_progressive,q_80,w_800/zhdfbwvbc2miyqyaryl9.jpg'),
+      (2,'Fish for sale', 'Loving fish', '2016-05-17', '2018-03-15', '78260', '1988-05-17', 'M', 'https://i.kinja-img.com/gawker-media/image/upload/s--4vlfc0Vs--/c_scale,f_auto,fl_progressive,q_80,w_800/zhdfbwvbc2miyqyaryl9.jpg'),
+      (2, 'Reptile for sale', 'Loving reppy', '2016-05-17', '2018-03-15', '78280', '1988-05-17', 'F', 'https://i.kinja-img.com/gawker-media/image/upload/s--4vlfc0Vs--/c_scale,f_auto,fl_progressive,q_80,w_800/zhdfbwvbc2miyqyaryl9.jpg');
+
+
+INSERT INTO characteristics(characteristic)
+VALUES(
+
+    );
+INSERT INTO users(username, email, password)
+VALUES (
+
+     )
