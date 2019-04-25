@@ -2,6 +2,7 @@ package com.codeup.adlister.controllers;
 
 import com.codeup.adlister.dao.DaoFactory;
 import com.codeup.adlister.dao.MySQLAdsDao;
+import com.codeup.adlister.models.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,7 +30,19 @@ public class SearchAdsServlet extends HttpServlet {
         String characteristics = request.getParameter("characteristics");
 
 
-
+        if(species != null) {
+            DaoFactory.getAdsDao().searchAds(species);
+            request.setAttribute("searchdiv", species);
+        } else if (age != null) {
+            DaoFactory.getAdsDao().searchAds(age);
+            request.setAttribute("searchdiv", age);
+        } else if (sex != null) {
+            DaoFactory.getAdsDao().searchAds(sex);
+            request.setAttribute("searchdiv", sex);
+        } else if (characteristics != null) {
+            DaoFactory.getAdsDao().searchAds(characteristics);
+            request.setAttribute("searchdiv", characteristics);
+        }
 
 
     }

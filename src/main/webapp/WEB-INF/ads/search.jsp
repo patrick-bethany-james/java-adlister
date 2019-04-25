@@ -58,11 +58,11 @@
             </div>
             Sex:
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" id="sex1" name="sex" value="male">
+                <input class="form-check-input" type="radio" id="sex1" name="gender" value="male">
                 <label class="form-check-label" for="sex1">Male</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" id="sex2" name="sex" value="female">
+                <input class="form-check-input" type="radio" id="sex2" name="gender" value="female">
                 <label class="form-check-label" for="sex2">Female</label>
             </div>
             Characteristics:
@@ -78,7 +78,20 @@
                 <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="shy">
                 <label class="form-check-label" for="inlineCheckbox3">Shy</label>
             </div>
+            <button type="submit">Please Sir...</button>
         </form>
+    </div>
+    <div class="container">
+        <h1>Ads searched:</h1>
+        <%--<c:forEach var="ad" items="${ads}">--%>
+            <%--<div class="col-md-4">--%>
+                <%--<h2>${ad.title}</h2>--%>
+                <%--<p>${ad.description}</p>--%>
+            <%--</div>--%>
+        <%--</c:forEach>--%>
+        <div>
+            ${searchdiv};
+        </div>
     </div>
 </body>
 </html>
