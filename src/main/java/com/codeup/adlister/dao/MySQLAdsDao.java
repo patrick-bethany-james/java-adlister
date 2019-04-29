@@ -123,7 +123,7 @@ public class MySQLAdsDao implements Ads {
 
     public Long updateAd(Ad ad){
         try {
-            String insertQuery = "UPDATE FROM ads " + "SET title = ?, description = ?, zipCode = ?, dob = ?, gender = ?, pictureURL = ?, species = ? WHERE id = user_id";
+            String insertQuery = "UPDATE ads " + "SET title = ?, description = ?, zipCode = ?, dob = ?, gender = ?, pictureURL = ?, species = ? WHERE id = user_id";
             PreparedStatement stmt = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, ad.getTitle());
             stmt.setString(2, ad.getDescription());
@@ -144,14 +144,28 @@ public class MySQLAdsDao implements Ads {
 
 
 
+//    private Ad extractAd(ResultSet rs) throws SQLException {
+//        return new Ad(
+//            rs.getLong("id"),
+//            rs.getLong("user_id"),
+//            rs.getString("title"),
+//            rs.getString("description")
+//        );
+//    }
+
     private Ad extractAd(ResultSet rs) throws SQLException {
         return new Ad(
-            rs.getLong("id"),
-            rs.getLong("user_id"),
-            rs.getString("title"),
-            rs.getString("description")
+                rs.getLong("user_id"),
+                rs.getString("title"),
+                rs.getString("description"),
+                rs.getString("zipCode"),
+                rs.getString("dob"),
+                rs.getString("gender"),
+                rs.getString("pictureURL"),
+                rs.getString("species")
         );
     }
+
 
     private List<Ad> createAdsFromResults(ResultSet rs) throws SQLException {
         List<Ad> ads = new ArrayList<>();
