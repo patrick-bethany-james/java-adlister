@@ -66,6 +66,23 @@ public class MySQLAdsDao implements Ads {
 
 
     @Override
+
+    public List<Ad> searchAds(String searchBy) { // title, description, gender
+
+
+        PreparedStatement stmt = null;
+        try {
+            String selectQuery = "SELECT * FROM ads WHERE species = ?";
+            stmt = connection.prepareStatement(selectQuery);
+            stmt.setString(1, searchBy);
+            ResultSet rs = stmt.executeQuery();
+            return createAdsFromResults(rs);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error searching all ads.", e);
+        }
+    }
+
+    @Override
     public Long insert(Ad ad) {
         try {
             String insertQuery = "INSERT INTO ads(user_id, title, description, createDate, zipCode, dob, gender, pictureURL, species) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -89,22 +106,40 @@ public class MySQLAdsDao implements Ads {
     }
 
 
-
-//    public Long search(Ad ad) {
-//        try {
-//            String insertQuery = "SELECT * ads where user_id like ?";
-//            PreparedStatement stmt = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
-//            stmt.setLong(1, ad.getUserId());
-//            stmt.executeUpdate();
+@Override
+    public void deleteAd(Long id) {
+        try {
+            String insertQuery = "DELETE FROM ads WHERE id = ?";
+            PreparedStatement stmt = connection.prepareStatement(insertQuery);
+            stmt.setLong(1, id);
+            stmt.executeUpdate();
 //            ResultSet rs = stmt.getGeneratedKeys();
 //            rs.next();
-//            return rs.getLong(1);
-//        } catch (SQLException e) {
-//            throw new RuntimeException("Error creating a new ad.", e);
-//        }
-//    }
+//            return all();
+        }catch (SQLException e){
+            throw new RuntimeException("Error deleting ad", e);
+        }
+    }
 
-
+    public Long updateAd(Ad ad){
+        try {
+            String insertQuery = "UPDATE FROM ads " + "SET title = ?, description = ?, zipCode = ?, dob = ?, gender = ?, pictureURL = ?, species = ? WHERE id = user_id";
+            PreparedStatement stmt = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, ad.getTitle());
+            stmt.setString(2, ad.getDescription());
+            stmt.setString(3, ad.getZipCode());
+            stmt.setString(4, ad.getDob());
+            stmt.setString(5, ad.getGender());
+            stmt.setString(6, ad.getPictureURL());
+            stmt.setString(7, ad.getSpecies());
+            stmt.executeUpdate();
+            ResultSet rs = stmt.getGeneratedKeys();
+            rs.next();
+            return rs.getLong(1);
+        }catch(SQLException e){
+            throw new RuntimeException("Error updating ad", e);
+        }
+    }
 
 
 
@@ -125,4 +160,14 @@ public class MySQLAdsDao implements Ads {
         }
         return ads;
     }
+
+//    private String buildQueryString(List<String> searchByArray) {
+//
+//        String queryString = "SELECT * from ads WHERE";
+//        for(String category : searchByArray) {
+//
+//        }
+//
+//        // need to know what was selected. search by species is equal to blank, and
+//    }
 }

@@ -2,13 +2,16 @@ package com.codeup.adlister.controllers;
 
 import com.codeup.adlister.dao.DaoFactory;
 import com.codeup.adlister.models.User;
+import com.codeup.adlister.util.Password;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.HashMap;
 
 @WebServlet(name = "controllers.LoginServlet", urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
@@ -20,22 +23,52 @@ public class LoginServlet extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+
         User user = DaoFactory.getUsersDao().findByUsername(username);
 
+        HashMap<String, String> Errors = new HashMap<>();
+
+        boolean loginHasIssues = username.isEmpty() || password.isEmpty();
+
+        if (username.isEmpty()) {
+            Errors.put("username", "<div class='alert alert-danger'>Please enter a valid username</div>");
+        }else{
+            request.setAttribute("username", username);
+        }
+        if (password.isEmpty()) {
+            Errors.put("password", "<div class='alert alert-danger'>Please enter the correct password</div>");
+        }else{
+            request.setAttribute("password", password);
+        }
+
+        request.setAttribute("Errors", Errors);
+
+        if (loginHasIssues) {
+            request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+        }
+
+
         if (user == null) {
+            Errors.put("username", "<div class='alert alert-danger'>Credentials do not match</div>");
+            request.setAttribute("Errors", Errors);
             response.sendRedirect("/login");
             return;
         }
 
+//        boolean validAttempt = Password.check(password, user.getPassword());
         boolean validAttempt = password.equals(user.getPassword());
 
         if (validAttempt) {
             request.getSession().setAttribute("user", user);
             response.sendRedirect("/profile");
         } else {
+            Errors.put("password", "<div class='alert alert-danger'>Credentials do not match</div>");
+            request.setAttribute("Errors", Errors);
             response.sendRedirect("/login");
         }
     }

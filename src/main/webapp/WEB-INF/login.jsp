@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -9,10 +10,16 @@
     <jsp:include page="/WEB-INF/partials/navbar.jsp" />
     <div class="container">
         <h1>Please Log In</h1>
+        <c:if test="${Errors.containsKey('username')}">
+            <p class="error"> ${Errors.get('username')}</p>
+        </c:if>
+        <c:if test="${Errors.containsKey('password')}">
+            <p class="error"> ${Errors.get('password')}</p>
+        </c:if>
         <form action="/login" method="POST">
             <div class="form-group">
                 <label for="username">Username</label>
-                <input id="username" name="username" class="form-control" type="text">
+                <input id="username" name="username" class="form-control" value="${username}" type="text">
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
