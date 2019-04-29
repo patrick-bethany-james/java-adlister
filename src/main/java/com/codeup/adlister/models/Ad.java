@@ -37,6 +37,10 @@ public class Ad {
         this.description = description;
     }
 
+    public Ad(long user_id) {
+        this.user_id = user_id;
+    }
+
     public long getId() {
         return id;
     }

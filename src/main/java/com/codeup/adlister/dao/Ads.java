@@ -10,6 +10,7 @@ public interface Ads {
     // insert a new ad and return the new ad's id
     Long insert(Ad ad);
 
+
     List<Ad> searchAds(String category);
     void deleteAd(Long id);
 

@@ -22,6 +22,7 @@
 
 
     <c:forEach var="ad" items="${ads}">
+
     <form action="/ads" method="post">
         <div class="form-group col-md-6">
             <label for="title">${ad.title}</label>
