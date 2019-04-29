@@ -7,13 +7,13 @@ public class Ad {
     private String description;
     private String createDate = "2018-04-25";
     private String soldDate;
-    private int zipCode;
+    private String zipCode;
     private String dob;
     private String gender;
     private String pictureURL;
     private String species;
 
-    public Ad(long user_id, String title, String description, int zipCode, String dob, String gender, String pictureURL, String species) {
+    public Ad(long user_id, String title, String description, String zipCode, String dob, String gender, String pictureURL, String species) {
         this.user_id = user_id;
         this.title = title;
         this.description = description;
@@ -35,6 +35,10 @@ public class Ad {
         this.user_id = userId;
         this.title = title;
         this.description = description;
+    }
+
+    public Ad(long user_id) {
+        this.user_id = user_id;
     }
 
     public long getId() {
@@ -93,11 +97,11 @@ public class Ad {
         this.soldDate = soldDate;
     }
 
-    public int getZipCode() {
+    public String getZipCode() {
         return zipCode;
     }
 
-    public void setZipCode(int zipCode) {
+    public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
 

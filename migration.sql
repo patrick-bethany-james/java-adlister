@@ -20,7 +20,7 @@ CREATE TABLE ads (
                    user_id INT UNSIGNED NOT NULL,
                    title VARCHAR(250) NOT NULL,
                    description VARCHAR(250) NOT NULL,
-                   createDate DATE,
+    createDate DATE,
                    soldDate DATE,
                    zipCode int,
                    dob DATE,

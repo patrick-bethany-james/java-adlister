@@ -36,6 +36,35 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
+//    @Override
+//    public List<Ad> all(String input) {
+//        PreparedStatement stmt = null;
+//        try {
+//            stmt = connection.prepareStatement("SELECT * FROM ads WHERE user");
+//            ResultSet rs = stmt.executeQuery();
+//            return createAdsFromResults(rs);
+//        } catch (SQLException e) {
+//            throw new RuntimeException("Error retrieving all ads.", e);
+//        }
+//    }
+
+    @Override
+    public List<Ad> search() {
+        PreparedStatement stmt = null;
+        try {
+            stmt = connection.prepareStatement("SELECT * FROM ads where user_id = '1'");
+            ResultSet rs = stmt.executeQuery();
+            return createAdsFromResults(rs);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error retrieving all ads.", e);
+        }
+    }
+
+
+
+
+
+
     @Override
     public Long insert(Ad ad) {
         try {
@@ -45,7 +74,7 @@ public class MySQLAdsDao implements Ads {
             stmt.setString(2, ad.getTitle());
             stmt.setString(3, ad.getDescription());
             stmt.setString(4,ad.getCreateDate());
-            stmt.setInt(5,ad.getZipCode());
+            stmt.setString(5,ad.getZipCode());
             stmt.setString(6,ad.getDob());
             stmt.setString(7,ad.getGender());
             stmt.setString(8,ad.getPictureURL());
@@ -58,6 +87,27 @@ public class MySQLAdsDao implements Ads {
             throw new RuntimeException("Error creating a new ad.", e);
         }
     }
+
+
+
+//    public Long search(Ad ad) {
+//        try {
+//            String insertQuery = "SELECT * ads where user_id like ?";
+//            PreparedStatement stmt = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
+//            stmt.setLong(1, ad.getUserId());
+//            stmt.executeUpdate();
+//            ResultSet rs = stmt.getGeneratedKeys();
+//            rs.next();
+//            return rs.getLong(1);
+//        } catch (SQLException e) {
+//            throw new RuntimeException("Error creating a new ad.", e);
+//        }
+//    }
+
+
+
+
+
 
     private Ad extractAd(ResultSet rs) throws SQLException {
         return new Ad(
