@@ -37,14 +37,14 @@ public class MySQLAdsDao implements Ads {
     }
 
     @Override
-    public List<Ad> searchAds(String category) { // title, description, gender
+    public List<Ad> searchAds(String searchBy) { // title, description, gender
 
 
         PreparedStatement stmt = null;
         try {
-            String selectQuery = "SELECT ? FROM ads";
+            String selectQuery = "SELECT * FROM ads WHERE species = ?";
             stmt = connection.prepareStatement(selectQuery);
-            stmt.setString(1, category);
+            stmt.setString(1, searchBy);
             ResultSet rs = stmt.executeQuery();
             return createAdsFromResults(rs);
         } catch (SQLException e) {
@@ -94,4 +94,14 @@ public class MySQLAdsDao implements Ads {
         }
         return ads;
     }
+
+//    private String buildQueryString(List<String> searchByArray) {
+//
+//        String queryString = "SELECT * from ads WHERE";
+//        for(String category : searchByArray) {
+//
+//        }
+//
+//        // need to know what was selected. search by species is equal to blank, and
+//    }
 }

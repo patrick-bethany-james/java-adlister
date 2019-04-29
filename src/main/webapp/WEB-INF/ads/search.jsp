@@ -19,7 +19,7 @@
 
     <div class="container">
         <h1>Search for a pet</h1>
-        <form method="post" action="/search">
+        <form method="get" action="/search">
             Species:
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" id="species1" name="species" value="cat"> <!-- these values should match the SQL species table values. Or will these build queries?-->
@@ -83,15 +83,17 @@
     </div>
     <div class="container">
         <h1>Ads searched:</h1>
-        <%--<c:forEach var="ad" items="${ads}">--%>
-            <%--<div class="col-md-4">--%>
-                <%--<h2>${ad.title}</h2>--%>
-                <%--<p>${ad.description}</p>--%>
-            <%--</div>--%>
-        <%--</c:forEach>--%>
-        <div>
-            ${searchdiv};
-        </div>
+        <c:forEach var="ad" items="${ads}">
+            <div class="col-md-4">
+                <h2>${ad.getTitle()}</h2>
+                <p>${ad.description}</p>
+
+            </div>
+        </c:forEach>
+        <%--<div>Searched ads:--%>
+
+            <%--${searchdiv};--%>
+        <%--</div>--%>
     </div>
 </body>
 </html>
