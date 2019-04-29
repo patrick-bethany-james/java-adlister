@@ -12,12 +12,27 @@
 <div class="container">
     <h1>Here Are all the ads!</h1>
 
+    <%--<c:forEach var="ad" items="${ads}">--%>
+        <%--<div class="col-md-6">--%>
+            <%--<h2>${ad.title}</h2>--%>
+            <%--<p>${ad.description}</p>--%>
+            <%--<button type="submit" class="btn btn-block btn-primary">Delete</button>--%>
+        <%--</div>--%>
+    <%--</c:forEach>--%>
+
+
     <c:forEach var="ad" items="${ads}">
-        <div class="col-md-6">
-            <h2>${ad.title}</h2>
-            <p>${ad.description}</p>
+    <form action="/ads" method="post">
+        <div class="form-group col-md-6">
+            <label for="title">${ad.title}</label>
+            <label for="title">${ad.description}</label>
+            <input type="hidden" name="id" value="${ad.id}">
+            <input id="title" type="submit" class="btn btn-block btn-primary">
+
         </div>
+    </form>
     </c:forEach>
+
 </div>
 
 </body>

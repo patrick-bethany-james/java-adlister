@@ -38,8 +38,6 @@ public class MySQLAdsDao implements Ads {
 
     @Override
     public List<Ad> searchAds(String category) { // title, description, gender
-
-
         PreparedStatement stmt = null;
         try {
             String selectQuery = "SELECT ? FROM ads";
@@ -51,9 +49,6 @@ public class MySQLAdsDao implements Ads {
             throw new RuntimeException("Error searching all ads.", e);
         }
     }
-
-
-
 
     @Override
     public Long insert(Ad ad) {
@@ -77,6 +72,44 @@ public class MySQLAdsDao implements Ads {
             throw new RuntimeException("Error creating a new ad.", e);
         }
     }
+
+@Override
+    public void deleteAd(Long id) {
+        try {
+            String insertQuery = "DELETE FROM ads WHERE id = ?";
+            PreparedStatement stmt = connection.prepareStatement(insertQuery);
+            stmt.setLong(1, id);
+            stmt.executeUpdate();
+//            ResultSet rs = stmt.getGeneratedKeys();
+//            rs.next();
+//            return all();
+        }catch (SQLException e){
+            throw new RuntimeException("Error deleting ad", e);
+        }
+    }
+
+    public Long updateAd(Ad ad){
+        try {
+            String insertQuery = "UPDATE FROM ads " + "SET title = ?, description = ?, zipCode = ?, dob = ?, gender = ?, pictureURL = ?, species = ? WHERE id = user_id";
+            PreparedStatement stmt = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, ad.getTitle());
+            stmt.setString(2, ad.getDescription());
+            stmt.setString(3, ad.getZipCode());
+            stmt.setString(4, ad.getDob());
+            stmt.setString(5, ad.getGender());
+            stmt.setString(6, ad.getPictureURL());
+            stmt.setString(7, ad.getSpecies());
+            stmt.executeUpdate();
+            ResultSet rs = stmt.getGeneratedKeys();
+            rs.next();
+            return rs.getLong(1);
+        }catch(SQLException e){
+            throw new RuntimeException("Error updating ad", e);
+        }
+    }
+
+
+
 
     private Ad extractAd(ResultSet rs) throws SQLException {
         return new Ad(
