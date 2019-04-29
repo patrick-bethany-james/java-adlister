@@ -47,18 +47,18 @@ public class MySQLAdsDao implements Ads {
 //            throw new RuntimeException("Error retrieving all ads.", e);
 //        }
 //    }
-
-    @Override
-    public List<Ad> search() {
-        PreparedStatement stmt = null;
-        try {
-            stmt = connection.prepareStatement("SELECT * FROM ads where user_id = '1'");
-            ResultSet rs = stmt.executeQuery();
-            return createAdsFromResults(rs);
-        } catch (SQLException e) {
-            throw new RuntimeException("Error retrieving all ads.", e);
-        }
-    }
+//
+//    @Override
+//    public List<Ad> search() {
+//        PreparedStatement stmt = null;
+//        try {
+//            stmt = connection.prepareStatement("SELECT * FROM ads where user_id = '1'");
+//            ResultSet rs = stmt.executeQuery();
+//            return createAdsFromResults(rs);
+//        } catch (SQLException e) {
+//            throw new RuntimeException("Error retrieving all ads.", e);
+//        }
+//    }
 
 
 
