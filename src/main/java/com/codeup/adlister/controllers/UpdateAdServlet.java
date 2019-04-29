@@ -31,7 +31,7 @@ public class UpdateAdServlet extends HttpServlet {
         );
 
 
-        DaoFactory.getAdsDao().insert(ad);
+        DaoFactory.getAdsDao().updateAd(ad);
         response.sendRedirect("/ads");
     }
 }

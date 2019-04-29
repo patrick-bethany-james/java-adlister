@@ -21,7 +21,11 @@ public class RegisterServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
+        request.setAttribute("username", "");
+        request.setAttribute("email", "");
+        request.setAttribute("password", "");
         String username = request.getParameter("username");
+        System.out.println(username);
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String hash = Password.hash(password);
@@ -30,11 +34,13 @@ public class RegisterServlet extends HttpServlet {
 
 
 
+
+
         if (DaoFactory.getUsersDao().findByUsername(username) != null) {
             request.setAttribute("error", username + " Username is already taken, please try another");
             request.setAttribute("username", username);
             request.setAttribute("email", email);
-            request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
+
             return;
         }
 
@@ -46,32 +52,55 @@ public class RegisterServlet extends HttpServlet {
                 || (! password.equals(passwordConfirmation));
 
 
-
-        Map<String, String> Errors = new HashMap<>();
-        if (username.isEmpty()) {
-            Errors.put("username", "<div class='alert alert-danger'>Please enter username</div>");
+        if(username.equals("")){
+            request.setAttribute("usernameError", "<div class='alert alert-danger'>Please enter username</div>" );
+//            request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
         }else{
             request.setAttribute("username", username);
         }
-        if (email.isEmpty()) {
-            Errors.put("email", "<div class='alert alert-danger'>Please enter email address</div>");
+        if(email.equals("")){
+            request.setAttribute("emailError", "<div class='alert alert-danger'>Please enter email</div>" );
+//            request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
         }else{
             request.setAttribute("email", email);
         }
-
-        if (password.isEmpty()) {
-            Errors.put("password", "<div class='alert alert-danger'>Please enter password</div>");
+        if(password.equals("")){
+            request.setAttribute("passwordError", "<div class='alert alert-danger'>Please enter password</div>" );
+//            request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
+        }else{
+            request.setAttribute("password", password);
         }
         if (!passwordConfirmation.equals(password)) {
-            Errors.put("confirm_password", "<div class='alert alert-danger'>Passwords must match</div>");
+            request.setAttribute("confirmError", "<div class='alert alert-danger'>Passwords must match</div>");
         }
 
-        request.setAttribute("Errors", Errors);
+
+
+
+//        Map<String, String> Errors = new HashMap<>();
+//        if (username.isEmpty()) {
+//            Errors.put("username", "<div class='alert alert-danger'>Please enter username</div>");
+//        }else{
+//            request.setAttribute("username", username);
+//        }
+//        if (email.isEmpty()) {
+//            Errors.put("email", "<div class='alert alert-danger'>Please enter email address</div>");
+//        }else{
+//            request.setAttribute("email", email);
+//        }
+//
+//        if (password.isEmpty()) {
+//            Errors.put("password", "<div class='alert alert-danger'>Please enter password</div>");
+//        }
+
+
+//        request.setAttribute("Errors", Errors);
 
 
 
 
         if (inputHasErrors) {
+//            request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
             response.sendRedirect("/register");
             return;
         }

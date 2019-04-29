@@ -17,10 +17,11 @@
                 <input id="username" name="username" class="form-control" value="${username}" type="text" >
 
                 <c:if test = "${error != null}">
-                    <p class="error">${error}</p>
+                    <p>${error}</p>
                 </c:if>
-                <c:if test = "${Errors.containsKey('username')}">
-                    <p class="error"> ${Errors.get('username')}</p>
+
+                <c:if test = "${username.equals('')}">
+                <p> ${usernameError}</p>
                 </c:if>
 
             </div>
@@ -29,8 +30,8 @@
                 <label for="email">Email</label>
                 <input id="email" name="email" class="form-control" value="${email}" type="text">
 
-                <c:if test = "${Errors.containsKey('email')}">
-                    <p>${Errors.get('email')}</p>
+                <c:if test = "${email.equals('')}">
+                    <p> ${emailError}</p>
                 </c:if>
             </div>
 
@@ -38,8 +39,8 @@
                 <label for="password">Password</label>
                 <input id="password" name="password" class="form-control" type="password" >
 
-                <c:if test = "${Errors.containsKey('password')}">
-                    <p>${Errors.get('password')}</p>
+                <c:if test = "${password.equals('')}">
+                    <p> ${passwordError}</p>
                 </c:if>
             </div>
 
@@ -47,8 +48,8 @@
                 <label for="confirm_password">Confirm Password</label>
                 <input id="confirm_password" name="confirm_password" class="form-control" type="password">
 
-                <c:if test = "${Errors.containsKey('confirm_password')}">
-                    <p>${Errors.get('confirm_password')}</p>
+                <c:if test = "${confirm_password != password}">
+                    <p> ${confirmError}</p>
                 </c:if>
 
             </div>

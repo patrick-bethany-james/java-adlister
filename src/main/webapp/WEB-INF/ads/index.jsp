@@ -24,8 +24,21 @@
     <c:forEach var="ad" items="${ads}">
     <form action="/ads" method="post">
         <div class="form-group col-md-6">
-            <label for="title">${ad.title}</label>
-            <label for="title">${ad.description}</label>
+            <div>
+                <label for="title">${ad.title}</label>
+            </div>
+            <div>
+                <label for="title">${ad.species}</label>
+            </div>
+            <div>
+                <label for="title">${ad.dob}</label>
+                <label for="title">${ad.gender}</label>
+                <label for="title">${ad.zipCode}</label>
+            </div>
+            <div>
+                <label for="title">${ad.description}</label>
+            </div>
+            <label for="title"><img src = "${ad.pictureURL}" height="250" width="350"></label>
             <input type="hidden" name="id" value="${ad.id}">
             <input id="title" type="submit" class="btn btn-block btn-primary">
 
