@@ -15,6 +15,7 @@
             <c:if test="${sessionScope.user != null}">
                 <li><img src="/img/welcomeDog1.png"></li>
                 <li><a href="/logout">Logout</a></li>
+                <li><a href= "/search">Search Ads</a></li>
                 <li><a href="/profile">My Profile</a></li>
                 <li><a href="/ads/create">Create Ad</a></li>
                 <li><a href="/ads/update">Update Ad</a></li>
