@@ -80,16 +80,16 @@ public class MySQLCharDao implements Characteristics {
     }
 
     @Override
-    public Long insert(Characteristic character) {
+    public ResultSet insert(Characteristic character) {
         try {
-            String insertQuery = "INSERT INTO characteristics(id, characteristic) VALUES (?, ?)";
+            String insertQuery = "INSERT INTO characteristics(characteristic) VALUES (?)";
             PreparedStatement stmt = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
-            stmt.setLong(1, character.getId());
-            stmt.setString(2,character.getCharacteristic());
+//            stmt.setLong(1, character.getId());
+            stmt.setString(1,character.getCharacteristic());
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
-            return rs.getLong(1);
+            return rs;
         } catch (SQLException e) {
             throw new RuntimeException("Error creating a new characteristic.", e);
         }
