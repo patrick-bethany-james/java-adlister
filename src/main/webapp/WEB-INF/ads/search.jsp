@@ -45,7 +45,7 @@
             </div>
 
             <%--Zip Code Filter--%>
-            <p>Zip Code</p>
+            <p>Zip Code:</p>
             <input type="text" name="location">
 
 
