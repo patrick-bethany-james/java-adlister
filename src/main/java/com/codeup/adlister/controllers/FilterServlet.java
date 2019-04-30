@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "controllers.AdsIndexServlet", urlPatterns = "/search")
+@WebServlet(name = "controllers.FilterServlet", urlPatterns = "/search")
 public class FilterServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
