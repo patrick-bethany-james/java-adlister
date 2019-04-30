@@ -36,6 +36,8 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
+
+
 //    @Override
 //    public List<Ad> all(String input) {
 //        PreparedStatement stmt = null;
@@ -62,6 +64,20 @@ public class MySQLAdsDao implements Ads {
 
 
 
+    public List<Ad> filter(String inputSpecies, String inputLocation, String inputGender, String inputAge) {
+        PreparedStatement stmt = null;
+        try {
+            stmt = connection.prepareStatement("SELECT * FROM ads WHERE species like ? AND zipCode like ? AND gender like ? AND dob like ?");
+            stmt.setString(1,inputSpecies);
+            stmt.setString(2,inputLocation);
+            stmt.setString(3,inputGender);
+            stmt.setString(4,inputAge);
+            ResultSet rs = stmt.executeQuery();
+            return createAdsFromResults(rs);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error retrieving all ads.", e);
+        }
+    }
 
 
 
