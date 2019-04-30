@@ -19,7 +19,6 @@ public class AdsIndexServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Long id = Long.parseLong(request.getParameter("id"));
-
         DaoFactory.getAdsDao().deleteAd(id);
 //        request.getRequestDispatcher("/WEB-INF/ads/index.jsp").forward(request, response);
             response.sendRedirect("/ads");

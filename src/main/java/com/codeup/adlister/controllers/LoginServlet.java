@@ -31,34 +31,34 @@ public class LoginServlet extends HttpServlet {
 
         User user = DaoFactory.getUsersDao().findByUsername(username);
 
-        HashMap<String, String> Errors = new HashMap<>();
+//        HashMap<String, String> Errors = new HashMap<>();
 
         boolean loginHasIssues = username.isEmpty() || password.isEmpty();
+//
+//        if (username.isEmpty()) {
+//            Errors.put("username", "<div class='alert alert-danger'>Please enter a valid username</div>");
+//        }else{
+//            request.setAttribute("username", username);
+//        }
+//        if (password.isEmpty()) {
+//            Errors.put("password", "<div class='alert alert-danger'>Please enter the correct password</div>");
+//        }else{
+//            request.setAttribute("password", password);
+//        }
 
-        if (username.isEmpty()) {
-            Errors.put("username", "<div class='alert alert-danger'>Please enter a valid username</div>");
-        }else{
-            request.setAttribute("username", username);
-        }
-        if (password.isEmpty()) {
-            Errors.put("password", "<div class='alert alert-danger'>Please enter the correct password</div>");
-        }else{
-            request.setAttribute("password", password);
-        }
-
-        request.setAttribute("Errors", Errors);
+//        request.setAttribute("Errors", Errors);
 
         if (loginHasIssues) {
             request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
         }
 
-
-        if (user == null) {
-            Errors.put("username", "<div class='alert alert-danger'>Credentials do not match</div>");
-            request.setAttribute("Errors", Errors);
-            response.sendRedirect("/login");
-            return;
-        }
+//
+//        if (user == null) {
+//            Errors.put("username", "<div class='alert alert-danger'>Credentials do not match</div>");
+//            request.setAttribute("Errors", Errors);
+//            response.sendRedirect("/login");
+//            return;
+//        }
 
 //        boolean validAttempt = Password.check(password, user.getPassword());
         boolean validAttempt = password.equals(user.getPassword());
@@ -67,8 +67,8 @@ public class LoginServlet extends HttpServlet {
             request.getSession().setAttribute("user", user);
             response.sendRedirect("/profile");
         } else {
-            Errors.put("password", "<div class='alert alert-danger'>Credentials do not match</div>");
-            request.setAttribute("Errors", Errors);
+//            Errors.put("password", "<div class='alert alert-danger'>Credentials do not match</div>");
+//            request.setAttribute("Errors", Errors);
             response.sendRedirect("/login");
         }
     }

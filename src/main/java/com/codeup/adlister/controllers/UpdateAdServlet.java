@@ -2,6 +2,7 @@ package com.codeup.adlister.controllers;
 
 import com.codeup.adlister.dao.DaoFactory;
 import com.codeup.adlister.models.Ad;
+import com.codeup.adlister.models.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,14 +14,14 @@ import java.io.IOException;
 @WebServlet(name = "controllers.UpdateAdServlet", urlPatterns = "/ads/update")
 public class UpdateAdServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/ads/update.jsp")
-                .forward(request, response);
+        request.setAttribute("ads", DaoFactory.getAdsDao().all());
+        request.getRequestDispatcher("/WEB-INF/ads/update.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-        Ad ad = new Ad(
-                1,
+        Long id = Long.parseLong(request.getParameter("ad_id")); //This is causing an error  **Check the MYSQLAdsDAO
+        User user = (User) request.getSession().getAttribute("user");
+        Ad ad = new Ad(user.getId(),
                 request.getParameter("title"),
                 request.getParameter("description"),
                 request.getParameter("zipCode"),
@@ -31,7 +32,7 @@ public class UpdateAdServlet extends HttpServlet {
         );
 
 
-        DaoFactory.getAdsDao().updateAd(ad);
+        DaoFactory.getAdsDao().updateAd(ad, id);
         response.sendRedirect("/ads");
     }
 }

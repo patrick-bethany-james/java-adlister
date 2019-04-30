@@ -13,7 +13,8 @@ public class Ad {
     private String pictureURL;
     private String species;
 
-    public Ad(long user_id, String title, String description, String zipCode, String dob, String gender, String pictureURL, String species) {
+    public Ad(long id, long user_id, String title, String description, String zipCode, String dob, String gender, String pictureURL, String species) {
+        this.id = id;
         this.user_id = user_id;
         this.title = title;
         this.description = description;
@@ -24,11 +25,15 @@ public class Ad {
         this.species = species;
     }
 
-    public Ad(long id, long userId, String title, String description) {
-        this.id = id;
-        this.user_id = userId;
+    public Ad(long user_id, String title, String description, String zipCode, String dob, String gender, String pictureURL, String species) {
+        this.user_id = user_id;
         this.title = title;
         this.description = description;
+        this.zipCode = zipCode;
+        this.dob = dob;
+        this.gender = gender;
+        this.pictureURL = pictureURL;
+        this.species = species;
     }
 
     public Ad(long userId, String title, String description) {

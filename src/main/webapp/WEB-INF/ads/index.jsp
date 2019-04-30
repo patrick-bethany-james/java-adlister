@@ -26,22 +26,25 @@
     <form action="/ads" method="post">
         <div class="form-group col-md-6">
             <div>
-                <label for="title">${ad.title}</label>
+                <label>${ad.title}</label>
             </div>
             <div>
-                <label for="title">${ad.species}</label>
+                <label>${ad.species}</label>
             </div>
             <div>
-                <label for="title">${ad.dob}</label>
-                <label for="title">${ad.gender}</label>
-                <label for="title">${ad.zipCode}</label>
+                <label>${ad.dob}</label>
+                <label>${ad.gender}</label>
+                <label>${ad.zipCode}</label>
             </div>
             <div>
-                <label for="title">${ad.description}</label>
+                <label>${ad.description}</label>
             </div>
-            <label for="title"><img src = "${ad.pictureURL}" height="250" width="350"></label>
-            <input type="hidden" name="id" value="${ad.id}">
-            <input id="title" type="submit" class="btn btn-block btn-primary">
+            <label><img src = "${ad.pictureURL}" height="250" width="350"></label>
+            <%--<input type="hidden" name="id" value="${ad.id}">--%>
+            <%--${ad.id}--%>
+            <%--&lt;%&ndash;<input type="hidden" name="user_id" value="${ad.user.id}">&ndash;%&gt;--%>
+            <%--<input id="title" type="submit" class="btn btn-block btn-primary"> Delete--%>
+            <%--&lt;%&ndash;<input id="update" type="submit" class="btn btn-block btn-primary"> Edit&ndash;%&gt;--%>
 
         </div>
     </form>

@@ -85,7 +85,7 @@
         <h1>Ads searched:</h1>
         <c:forEach var="ad" items="${ads}">
             <div class="col-md-4">
-                <h2>${ad.getTitle()}</h2>
+                <h2>${ad.title}</h2>
                 <p>${ad.description}</p>
 
             </div>

@@ -16,9 +16,7 @@
                 <li><a href="/logout">Logout</a></li>
                 <li><a href="/profile">My Profile</a></li>
                 <li><a href="/ads/create">Create Ad</a></li>
-                <a class="navbar-brand" href="/index.jsp">
-                    <img src="/img/welcomeDog1.png" alt="dog">
-                </a>
+                <li><a href="/ads/update">Update Ad</a></li>
             </c:if>
 
 
