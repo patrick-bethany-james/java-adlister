@@ -17,6 +17,7 @@
         <c:choose>
             <c:when test="${ad.user_id == sessionScope.user.id}">
                 <form action="/profile" method="post">
+
                         <jsp:include page="/WEB-INF/partials/ad.jsp" />
                         <input type="hidden" name="id" value="${ad.id}">
                         <input type="hidden" name="user_id" value="${ad.user_id}">
@@ -77,6 +78,18 @@
             </c:when>
         </c:choose>
     </c:forEach>
+
+<c:forEach var="character" items="${characters}">
+    <c:choose>
+        <c:when test="${ad.user_id == sessionScope.user.id}">
+        <div>
+            <label>${characteristic.characteristic}</label>
+        </div>
+        </c:when>
+    </c:choose>
+</c:forEach>
+
+
     </div>
 
 

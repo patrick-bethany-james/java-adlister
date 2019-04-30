@@ -19,28 +19,15 @@ public class ViewProfileServlet extends HttpServlet {
             return;
         }
         request.setAttribute("ads", DaoFactory.getAdsDao().all());
+        request.setAttribute("characters", DaoFactory.getCharacterDao().all());
         request.getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        Long id = Long.parseLong(request.getParameter("id"));
-        DaoFactory.getAdsDao().deleteAd(id);
-        response.sendRedirect("/profile");
-//        Long user_id = Long.parseLong(request.getParameter("user_id"));
-//        User user = (User) request.getSession().getAttribute("user");
-//        Ad ad = new Ad(user.getId(),
-//                request.getParameter("title"),
-//                request.getParameter("description"),
-//                request.getParameter("zipCode"),
-//                request.getParameter("dob"),
-//                request.getParameter("gender"),
-//                request.getParameter("pictureURL"),
-//                request.getParameter("species_type")
-//        );
+//    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+////        Long id = Long.parseLong(request.getParameter("id"));
+////        DaoFactory.getAdsDao().deleteAd(id);
+////        response.sendRedirect("/profile");
 //
-//
-//        DaoFactory.getAdsDao().updateAd(ad, user_id);
-//        response.sendRedirect("/profile");
-    }
+//    }
 }
 

@@ -2,22 +2,22 @@ package com.codeup.adlister.dao;
 
 import com.codeup.adlister.Config;
 import com.codeup.adlister.models.Ad;
+import com.codeup.adlister.models.Characteristic;
 import com.mysql.cj.jdbc.Driver;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MySQLAdsDao implements Ads {
+public class MySQLCharDao implements Characteristics {
     private Connection connection = null;
-
-    public MySQLAdsDao(Config config) {
+    public MySQLCharDao(Config config) {
         try {
             DriverManager.registerDriver(new Driver());
             connection = DriverManager.getConnection(
-                config.getUrl(),
-                config.getUser(),
-                config.getPassword()
+                    config.getUrl(),
+                    config.getUser(),
+                    config.getPassword()
             );
         } catch (SQLException e) {
             throw new RuntimeException("Error connecting to the database!", e);
@@ -25,14 +25,14 @@ public class MySQLAdsDao implements Ads {
     }
 
     @Override
-    public List<Ad> all() {
+    public List<Characteristic> all() {
         PreparedStatement stmt = null;
         try {
-            stmt = connection.prepareStatement("SELECT * FROM ads");
+            stmt = connection.prepareStatement("SELECT * FROM characteristics");
             ResultSet rs = stmt.executeQuery();
-            return createAdsFromResults(rs);
+            return createCharsFromResults(rs);
         } catch (SQLException e) {
-            throw new RuntimeException("Error retrieving all ads.", e);
+            throw new RuntimeException("Error retrieving all characters.", e);
         }
     }
 
@@ -66,48 +66,40 @@ public class MySQLAdsDao implements Ads {
 
 
     @Override
-
-    public List<Ad> searchAds(String searchBy) { // title, description, gender
+    public List<Characteristic> searchChar(String searchBy) { // title, description, gender
         PreparedStatement stmt = null;
         try {
             String selectQuery = "SELECT * FROM ads WHERE species = ?";
             stmt = connection.prepareStatement(selectQuery);
             stmt.setString(1, searchBy);
             ResultSet rs = stmt.executeQuery();
-            return createAdsFromResults(rs);
+            return createCharsFromResults(rs);
         } catch (SQLException e) {
             throw new RuntimeException("Error searching all ads.", e);
         }
     }
 
     @Override
-    public Long insert(Ad ad) {
+    public Long insert(Characteristic character) {
         try {
-            String insertQuery = "INSERT INTO ads(user_id, title, description, createDate, zipCode, dob, gender, pictureURL, species) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String insertQuery = "INSERT INTO characteristics(id, characteristic) VALUES (?, ?)";
             PreparedStatement stmt = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
-            stmt.setLong(1, ad.getUserId());
-            stmt.setString(2, ad.getTitle());
-            stmt.setString(3, ad.getDescription());
-            stmt.setString(4,ad.getCreateDate());
-            stmt.setString(5,ad.getZipCode());
-            stmt.setString(6,ad.getDob());
-            stmt.setString(7,ad.getGender());
-            stmt.setString(8,ad.getPictureURL());
-            stmt.setString(9,ad.getSpecies());
+            stmt.setLong(1, character.getId());
+            stmt.setString(2,character.getCharacteristic());
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
             return rs.getLong(1);
         } catch (SQLException e) {
-            throw new RuntimeException("Error creating a new ad.", e);
+            throw new RuntimeException("Error creating a new characteristic.", e);
         }
     }
 
 
-@Override
-    public void deleteAd(Long id) {
+    @Override
+    public void deleteCharacter(Long id) {
         try {
-            String insertQuery = "DELETE FROM ads WHERE id = ?";
+            String insertQuery = "DELETE FROM characteristics WHERE id = ?";
             PreparedStatement stmt = connection.prepareStatement(insertQuery);
             stmt.setLong(1, id);
             stmt.executeUpdate();
@@ -119,22 +111,16 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
-    public List<Ad> updateAd(Ad ad, Long ad_id){
+    public List<Characteristic> updateCharacter(Characteristic character, Long char_id){
         try {
-            String insertQuery = "UPDATE ads " + "SET title = ?, description = ?, zipCode = ?, dob = ?, gender = ?, pictureURL = ?, species = ? WHERE id = ?";
+            String insertQuery = "UPDATE characteristics " + "SET characteristic = ? WHERE id = ?";
             PreparedStatement stmt = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
-            stmt.setString(1, ad.getTitle());
-            stmt.setString(2, ad.getDescription());
-            stmt.setString(3, ad.getZipCode());
-            stmt.setString(4, ad.getDob());
-            stmt.setString(5, ad.getGender());
-            stmt.setString(6, ad.getPictureURL());
-            stmt.setString(7, ad.getSpecies());
-            stmt.setLong(8, ad_id);
+            stmt.setString(1, character.getCharacteristic());
+            stmt.setLong(2, char_id);
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
-            return createAdsFromResults(rs);
+            return createCharsFromResults(rs);
         }catch(SQLException e){
             throw new RuntimeException("Error updating ad", e);
         }
@@ -155,27 +141,19 @@ public class MySQLAdsDao implements Ads {
 //        );
 //    }
 
-    private Ad extractAd(ResultSet rs) throws SQLException {
-        return new Ad(
+    private Characteristic extractCharacter(ResultSet rs) throws SQLException {
+        return new Characteristic(
                 rs.getLong(("id")),
-                rs.getLong("user_id"),
-                rs.getString("title"),
-                rs.getString("description"),
-                rs.getString("zipCode"),
-                rs.getString("dob"),
-                rs.getString("gender"),
-                rs.getString("pictureURL"),
-                rs.getString("species")
-        );
+                rs.getString("characteristic"));
     }
 
 
-    private List<Ad> createAdsFromResults(ResultSet rs) throws SQLException {
-        List<Ad> ads = new ArrayList<>();
+    private List<Characteristic> createCharsFromResults(ResultSet rs) throws SQLException {
+        List<Characteristic> characters = new ArrayList<>();
         while (rs.next()) {
-            ads.add(extractAd(rs));
+            characters.add(extractCharacter(rs));
         }
-        return ads;
+        return characters;
     }
 
 //    private String buildQueryString(List<String> searchByArray) {
