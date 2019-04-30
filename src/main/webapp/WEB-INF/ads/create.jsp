@@ -45,7 +45,6 @@
                     <label for="pictureURL">Picture URL</label>
                     <textarea id="pictureURL" name="pictureURL" class="form-control" type="text"></textarea>
                 </div>
-
                 <input type="submit" class="btn btn-block btn-primary">
             </form>
         </div>

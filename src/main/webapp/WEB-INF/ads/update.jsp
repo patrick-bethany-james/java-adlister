@@ -8,29 +8,14 @@
 </head>
     <body>
     <jsp:include page="/WEB-INF/partials/navbar.jsp" />
-        <div class="container">
             <h1>Update Your Ad</h1>
+        <div class="container">
 
             <c:forEach var="ad" items="${ads}">
                 <c:choose>
                     <c:when test="${ad.user_id == sessionScope.user.id}">
                         <form action="/ads/update" method="post">
-                            <div class="form-group col-md-6">
-                                <div>
-                                    <label>${ad.title}</label>
-                                </div>
-                                <div>
-                                    <label>${ad.species}</label>
-                                </div>
-                                <div>
-                                    <label>${ad.dob}</label>
-                                    <label>${ad.gender}</label>
-                                    <label>${ad.zipCode}</label>
-                                </div>
-                                <div>
-                                    <label>${ad.description}</label>
-                                </div>
-                                <label><img src = "${ad.pictureURL}" height="250" width="350"></label>
+                            <jsp:include page="/WEB-INF/partials/ad.jsp" />
                                 <input type="hidden" name="id" value="${ad.id}">
                                 <input type="hidden" name="user_id" value="${ad.user_id}">
 
@@ -62,8 +47,10 @@
                                     <input id="dob" name="dob" class="form-control" type="text" placeholder="YYYY-MM-DD">
                                 </div>
                                 <div>
-                                    <label for="gender">Gender</label>
-                                    <input id="gender" name="gender" class="form-control" type="text" placeholder="M or F">
+                                    <select name="gender">
+                                        <option id="gendermale" class="form-control" value="m">Male</option>
+                                        <option id="genderfemale" class="form-control" value="f">Female</option>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="pictureURL">Picture URL</label>
@@ -71,8 +58,7 @@
                                 </div>
 
                                 <input type="hidden" name="ad_id" value="${ad.id}">
-                                <input id="update" type="submit" class="btn btn-block btn-primary"> Edit
-
+                                <button id="update" type="submit" class="btn btn-block btn-primary">Edit</button>
                             </div>
                         </form>
                     </c:when>

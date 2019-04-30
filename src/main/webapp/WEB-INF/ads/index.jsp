@@ -21,34 +21,16 @@
     <%--</c:forEach>--%>
 
 
-    <c:forEach var="ad" items="${ads}">
 
-    <form action="/ads" method="post">
-        <div class="form-group col-md-6">
-            <div>
-                <label>${ad.title}</label>
-            </div>
-            <div>
-                <label>${ad.species}</label>
-            </div>
-            <div>
-                <label>${ad.dob}</label>
-                <label>${ad.gender}</label>
-                <label>${ad.zipCode}</label>
-            </div>
-            <div>
-                <label>${ad.description}</label>
-            </div>
-            <label><img src = "${ad.pictureURL}" height="250" width="350"></label>
-            <%--<input type="hidden" name="id" value="${ad.id}">--%>
+            <jsp:include page="/WEB-INF/partials/ad.jsp" />
+
+    <%--<input type="hidden" name="id" value="${ad.id}">--%>
             <%--${ad.id}--%>
             <%--&lt;%&ndash;<input type="hidden" name="user_id" value="${ad.user.id}">&ndash;%&gt;--%>
             <%--<input id="title" type="submit" class="btn btn-block btn-primary"> Delete--%>
             <%--&lt;%&ndash;<input id="update" type="submit" class="btn btn-block btn-primary"> Edit&ndash;%&gt;--%>
 
-        </div>
-    </form>
-    </c:forEach>
+
 
 </div>
 
