@@ -13,7 +13,7 @@
                 <li><a href= "/search">Search Ads</a></li>
             </c:if>
             <c:if test="${sessionScope.user != null}">
-                <li><img src="/img/welcomeDog1.png"></li>
+                <li><img src="/img/welcomeDog1.png" height="125px" width="100%"></li>
                 <li><a href="/logout">Logout</a></li>
                 <li><a href= "/search">Search Ads</a></li>
                 <li><a href="/profile">My Profile</a></li>

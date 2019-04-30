@@ -19,8 +19,8 @@
 
     <div class="container">
         <h1>Search for a pet</h1>
+        <img src="/img/SearchDog.png" height="100px" width="150px">
         <form method="post" action="/search">
-
             <%--Species Filter--%>
             Species:
             <div class="form-check form-check-inline">
