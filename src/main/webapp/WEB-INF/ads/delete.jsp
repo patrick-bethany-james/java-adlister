@@ -9,7 +9,7 @@
     <body>
         <jsp:include page="/WEB-INF/partials/navbar.jsp" />
         <div class="container">
-        <h1>Choose an ad to delete</h1>
+        <h1 style="text-align: center">Choose an ad to delete</h1>
             <c:forEach var="ad" items="${ads}">
                 <c:choose>
                     <c:when test="${ad.user_id == sessionScope.user.id}">
@@ -25,10 +25,11 @@
                                         <span style="font-weight: bold">Gender: </span>${ad.gender}<br>
                                         <span style="font-weight: bold">Location: </span>${ad.zipCode}
                                     </div>
+
                                 </div>
                                 <input type="hidden" name="id" value="${ad.id}">
                                 <input type="hidden" name="user_id" value="${ad.user_id}">
-                                <button id="delete" type="submit" class="btn btn-block btn-primary"> Delete</button>
+                                    <button id="delete" type="submit" class="btn btn-danger" style="width: 100%;">Delete</button>
                             </div>
                         </form>
                     </c:when>

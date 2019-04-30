@@ -8,13 +8,13 @@
 </head>
     <body>
     <jsp:include page="/WEB-INF/partials/navbar.jsp" />
-            <h1>Update Your Ad</h1>
         <div class="container">
+            <h1 style="text-align: center">Update Your Ad</h1>
 
             <c:forEach var="ad" items="${ads}">
                 <c:choose>
                     <c:when test="${ad.user_id == sessionScope.user.id}">
-                <div class="col-md-6">
+                <div class="col-md-4">
                         <form action="/ads/update" method="post">
 
                                     <div class="card" style="border: 1px solid grey; margin-bottom: 10px;">
