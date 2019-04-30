@@ -19,7 +19,9 @@
 
     <div class="container">
         <h1>Search for a pet</h1>
-        <form method="get" action="/search">
+        <form method="post" action="/search">
+
+            <%--Species Filter--%>
             Species:
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" id="species1" name="species" value="cat"> <!-- these values should match the SQL species table values. Or will these build queries?-->
@@ -41,8 +43,13 @@
                 <input class="form-check-input" type="radio" id="species5" name="species" value="rodents">
                 <label class="form-check-label" for="species5">Rodents</label>
             </div>
+
+            <%--Zip Code Filter--%>
             <p>Zip Code</p>
             <input type="text" name="location">
+
+
+            <%--Age Filter--%>
             <p>Age:</p>
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" id="age1" name="age" value="3">
@@ -56,30 +63,37 @@
                 <input class="form-check-input" type="radio" id="age3" name="age" value="8">
                 <label class="form-check-label" for="age3">8+</label>
             </div>
+
+
+            <%--Sex Filter--%>
             Sex:
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" id="sex1" name="gender" value="male">
+                <input class="form-check-input" type="radio" id="sex1" name="gender" value="M">
                 <label class="form-check-label" for="sex1">Male</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" id="sex2" name="gender" value="female">
+                <input class="form-check-input" type="radio" id="sex2" name="gender" value="F">
                 <label class="form-check-label" for="sex2">Female</label>
             </div>
-            Characteristics:
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="kidfriendly">
-                <label class="form-check-label" for="inlineCheckbox1">Kid-Friendly</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="petfriendly">
-                <label class="form-check-label" for="inlineCheckbox2">Pet-Friendly</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="shy">
-                <label class="form-check-label" for="inlineCheckbox3">Shy</label>
-            </div>
+
+
+            <%--Characteristics:--%>
+            <%--<div class="form-check form-check-inline">--%>
+                <%--<input class="form-check-input" type="radio" id="inlineCheckbox1" value="kidfriendly">--%>
+                <%--<label class="form-check-label" for="inlineCheckbox1">Kid-Friendly</label>--%>
+            <%--</div>--%>
+            <%--<div class="form-check form-check-inline">--%>
+                <%--<input class="form-check-input" type="radio" id="inlineCheckbox2" value="petfriendly">--%>
+                <%--<label class="form-check-label" for="inlineCheckbox2">Pet-Friendly</label>--%>
+            <%--</div>--%>
+            <%--<div class="form-check form-check-inline">--%>
+                <%--<input class="form-check-input" type="radio" id="inlineCheckbox3" value="shy">--%>
+                <%--<label class="form-check-label" for="inlineCheckbox3">Shy</label>--%>
+            <%--</div>--%>
             <button type="submit">Please Sir...</button>
         </form>
+
+        <%--View Filtered Ads--%>
     </div>
     <div class="container">
         <h1>Ads searched:</h1>
@@ -90,10 +104,6 @@
 
             </div>
         </c:forEach>
-        <%--<div>Searched ads:--%>
-
-            <%--${searchdiv};--%>
-        <%--</div>--%>
     </div>
 </body>
 </html>
