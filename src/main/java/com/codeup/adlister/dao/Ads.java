@@ -2,7 +2,9 @@ package com.codeup.adlister.dao;
 
 import com.codeup.adlister.models.Ad;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public interface Ads {
     // get a list of all the ads
@@ -10,7 +12,8 @@ public interface Ads {
     // insert a new ad and return the new ad's id
     Long insert(Ad ad);
 
-    List<Ad> searchAds(String category);
+    List<Ad> searchAds(Map<String, List> categorySearch);
     void deleteAd(Long id);
+
 
 }

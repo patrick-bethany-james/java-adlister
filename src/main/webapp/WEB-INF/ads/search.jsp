@@ -42,7 +42,7 @@
                 <label class="form-check-label" for="species5">Rodents</label>
             </div>
             <p>Zip Code</p>
-            <input type="text" name="location">
+            <input type="text" name="zipcode" value="">
             <p>Age:</p>
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" id="age1" name="age" value="3">
@@ -58,24 +58,24 @@
             </div>
             Sex:
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" id="sex1" name="gender" value="male">
+                <input class="form-check-input" type="radio" id="sex1" name="sex" value="male">
                 <label class="form-check-label" for="sex1">Male</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" id="sex2" name="gender" value="female">
+                <input class="form-check-input" type="radio" id="sex2" name="sex" value="female">
                 <label class="form-check-label" for="sex2">Female</label>
             </div>
             Characteristics:
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="kidfriendly">
+                <input class="form-check-input" type="checkbox" name="characteristics" id="inlineCheckbox1" value="kidfriendly">
                 <label class="form-check-label" for="inlineCheckbox1">Kid-Friendly</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="petfriendly">
+                <input class="form-check-input" type="checkbox" name="characteristics" id="inlineCheckbox2" value="petfriendly">
                 <label class="form-check-label" for="inlineCheckbox2">Pet-Friendly</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="shy">
+                <input class="form-check-input" type="checkbox" name="characteristics" id="inlineCheckbox3" value="shy">
                 <label class="form-check-label" for="inlineCheckbox3">Shy</label>
             </div>
             <button type="submit">Please Sir...</button>
@@ -83,16 +83,18 @@
     </div>
     <div class="container">
         <h1>Ads searched:</h1>
+
+
         <c:forEach var="ad" items="${ads}">
             <div class="col-md-4">
-                <h2>${ad.getTitle()}</h2>
+                <h2>${ad.title}</h2>
                 <p>${ad.description}</p>
 
             </div>
         </c:forEach>
         <%--<div>Searched ads:--%>
 
-            <%--${searchdiv};--%>
+            <%--${ads};--%>
         <%--</div>--%>
     </div>
 </body>

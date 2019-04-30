@@ -7,6 +7,7 @@ import com.mysql.cj.jdbc.Driver;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class MySQLAdsDao implements Ads {
     private Connection connection = null;
@@ -38,14 +39,15 @@ public class MySQLAdsDao implements Ads {
 
     @Override
 
-    public List<Ad> searchAds(String searchBy) { // title, description, gender
+    public List<Ad> searchAds(Map<String, List> categorySearch) { // title, description, gender
 
 
         PreparedStatement stmt = null;
         try {
-            String selectQuery = "SELECT * FROM ads WHERE species = ?";
+            String selectQuery = buildQueryString(categorySearch);
+            System.out.println("this is the query i made!" + selectQuery);
             stmt = connection.prepareStatement(selectQuery);
-            stmt.setString(1, searchBy);
+//            stmt.setString(1, selectQuery);
             ResultSet rs = stmt.executeQuery();
             return createAdsFromResults(rs);
         } catch (SQLException e) {
@@ -131,13 +133,70 @@ public class MySQLAdsDao implements Ads {
         return ads;
     }
 
-//    private String buildQueryString(List<String> searchByArray) {
+    private String buildQueryString(Map<String, List> categorySearch) {
+
+        String queryString = "SELECT * from ads WHERE ";
+
+
+ // if it contains a key, build a string like "species = (value of key)" and then build the query string with it.
+        if (categorySearch.get("species").isEmpty()){
+            queryString += "species = '%'";
+        } else {
+//            queryString += "species = " + categorySearch.get("species");
+
+            for(Object species : categorySearch.get("species")) {
+
+                queryString += "species = " + "'" + species.toString() + "';";
+                return queryString;
+            }
+        }
+
+        if (categorySearch.get("zipcode").isEmpty()){
+            queryString += "zipcode = '%'";
+        } else {
+            queryString += "zipcode = " + categorySearch.get("zipcode");
+        }
+
+        if (categorySearch.get("age").isEmpty()){
+            queryString += "age = '%'";
+        } else {
+            if (categorySearch.get("age").toString().equals("3")) {
+                queryString += "age BETWEEN 0 AND 3";
+            } else if (categorySearch.get("age").toString().equals("4")) {
+                queryString += "age BETWEEN 4 AND 7";
+            } else if (categorySearch.get("age").toString().equals("8")) {
+                queryString += "age > 8";
+            }
+        }
+
+        if (categorySearch.get("sex").isEmpty()){
+            queryString += "sex = '%'";
+        } else {
+            queryString += "sex = " + categorySearch.get("sex");
+        }
+
+        if (categorySearch.get("characteristics").isEmpty()) {
+            queryString += "characteristics = '%'";
+        }
+//        } else {
+//            queryString += "characteristics = " + searchByMap.get("characteristics").toArray(); ;
+//            for(Object characteristics : searchByMap.get("characteristics")){
+//                queryString += "AND" + characteristics.toString();
+//            }
 //
-//        String queryString = "SELECT * from ads WHERE";
-//        for(String category : searchByArray) {
 //
+//            queryString += "characteristics = " + searchByMap.get("characteristics");
 //        }
-//
-//        // need to know what was selected. search by species is equal to blank, and
-//    }
+
+
+
+        // KEY         -     VALUE
+        // species           [ cat ] or [ dog ] or [ rodent ]
+        // zipcode
+        // age
+        // sex
+        // characteristics      [ kid-friendly, shy, active ]
+        System.out.println("look at this garbage: " + queryString);
+        return queryString;
+    }
 }
