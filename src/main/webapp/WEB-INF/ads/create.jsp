@@ -46,10 +46,10 @@
                     <textarea id="pictureURL" name="pictureURL" class="form-control" type="text"></textarea>
                 </div>
 
-                <div>
-                    <label for="gender">Characteristics</label>
-                    <input id="character" name="character" class="form-control" type="text">
-                </div>
+                <%--<div>--%>
+                    <%--<label for="gender">Characteristics</label>--%>
+                    <%--<input id="character" name="character" class="form-control" type="text">--%>
+                <%--</div>--%>
                 <input type="submit" class="btn btn-block btn-primary">
             </form>
         </div>
