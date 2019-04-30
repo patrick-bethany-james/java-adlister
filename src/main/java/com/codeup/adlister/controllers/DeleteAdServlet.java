@@ -11,17 +11,18 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-    @WebServlet(name = "controllers.DeleteAdServlet", urlPatterns = "/delete")
+    @WebServlet(name = "controllers.DeleteAdServlet", urlPatterns = "/ads/delete")
     public class DeleteAdServlet extends HttpServlet {
         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            request.getRequestDispatcher("/WEB-INF/ads/index.jsp").forward(request, response);
+            request.setAttribute("ads", DaoFactory.getAdsDao().all());
+            request.getRequestDispatcher("/WEB-INF/ads/delete.jsp").forward(request, response);
         }
 
         protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
             Long id = Long.parseLong(request.getParameter("id"));
-//
             DaoFactory.getAdsDao().deleteAd(id);
-            request.getRequestDispatcher("/WEB-INF/ads/index.jsp").forward(request, response);
+            response.sendRedirect("/ads/delete");
+//            request.getRequestDispatcher("/WEB-INF/ads/index.jsp").forward(request, response);
 //            response.sendRedirect("/ads");
         }
     }

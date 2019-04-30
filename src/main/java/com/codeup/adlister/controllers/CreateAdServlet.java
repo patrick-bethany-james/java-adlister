@@ -2,6 +2,7 @@ package com.codeup.adlister.controllers;
 
 import com.codeup.adlister.dao.DaoFactory;
 import com.codeup.adlister.models.Ad;
+import com.codeup.adlister.models.Characteristic;
 import com.codeup.adlister.models.User;
 
 import javax.servlet.ServletException;
@@ -33,7 +34,11 @@ public class CreateAdServlet extends HttpServlet {
                 request.getParameter("species_type")
         );
 
+        Characteristic character = new Characteristic(user.getId(),
+        request.getParameter("character"));
 
+
+        DaoFactory.getCharacterDao().insert(character);
         DaoFactory.getAdsDao().insert(ad);
         response.sendRedirect("/ads");
 

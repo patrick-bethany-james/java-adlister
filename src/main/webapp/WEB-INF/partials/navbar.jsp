@@ -17,6 +17,7 @@
                 <li><a href="/profile">My Profile</a></li>
                 <li><a href="/ads/create">Create Ad</a></li>
                 <li><a href="/ads/update">Update Ad</a></li>
+                <li><a href="/ads/delete">Delete Ad</a></li>
             </c:if>
 
 
